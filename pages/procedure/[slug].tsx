@@ -1,3 +1,4 @@
+import { GetStaticProps } from 'next'
 import { Chip, Container, Stack, Typography } from '@mui/material';
 import { PortableText } from '@portabletext/react'
 import Layout from '../../components/Layout'
@@ -130,9 +131,9 @@ export async function getStaticPaths() {
   }
 }
 
-export async function getStaticProps(context) {
+const getStaticProps: GetStaticProps = async (context) => {
   // It's important to default the slug so that it doesn't return "undefined"
-  const { slug = '' } = context.params
+  const { slug } = context?.params || { slug: '' };
   const personFields = `{
     preferred_name,
     'name': select(
@@ -161,8 +162,5 @@ export async function getStaticProps(context) {
   }
 }
 
+export { getStaticProps }
 export default Procedure
-
-const asdfa = `
-  [_type == "<your document type>" && _rev == "<rev id>"] { …, author-> }
-  `

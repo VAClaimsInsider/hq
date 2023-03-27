@@ -1,3 +1,5 @@
+import { GetServerSideProps } from 'next'
+
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { Button, Card, CardActions, CardContent, Chip, Container, Grid, Stack, Typography } from '@mui/material';
@@ -76,7 +78,7 @@ const Procedures = ({ items, department }: { items: IItems[], department: IDepar
   </Layout>
 }
 
-export async function getServerSideProps({ query }) {
+const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const itemsQuery = `*[
       _type == "procedure"
       && select(
@@ -113,4 +115,5 @@ export async function getServerSideProps({ query }) {
   }
 }
 
+export { getServerSideProps };
 export default Procedures
